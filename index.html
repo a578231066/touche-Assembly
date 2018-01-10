@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>演示：移动端TAB触屏切换效果</title>
+<meta name="keywords" content="移动，切换" />
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<script type="text/javascript" src="js/zepto_min.js"></script>
+<script type="text/javascript" src="js/touchslider.js"></script>
+
+</head>
+
+<body>
+<style>
+ul#bcty365_nav{padding-left:50px; margin-bottom:10px; border-bottom:2px solid #ccc; _zoom:1;}
+ul#bcty365_nav li{float:left; display:inline; margin:10px;}
+ul#bcty365_nav li a{display:block;color:#000000; font-size:16px;}
+ul#bcty365_nav li a,#wimoban_p,#wimoban_p a{ font-family:"微软雅黑";}
+ul#bcty365_nav li a:hover,#wimoban_p a:hover{color:red;}
+</style>	
+
+<div id="main">
+	<div class="box-163css">
+    	<ul id="pagenavi" class="page">
+            <li><a href="#" class="active">CSS3</a></li>
+          	<li><a href="#">JAVASCRIPT</a></li>
+            <li><a href="#">PHP</a></li>
+            <li><a href="#">HTML5</a></li>
+            <li><a href="#">JAVASCRIPT</a></li>
+            <li><a href="#">PHP</a></li>
+            <li><a href="#">HTML5</a></li>
+        </ul>
+        <div id="slider" class="swipe">
+          <ul class="box01_list">
+            <li class="li_list">
+    			<div class="pic_list"><span><a href="#">纯CSS3图标旋转效果</a></span></div>
+    		</li>
+            <li class="li_list">
+    			<div class="pic_list"><span><a href="#">超酷的照片墙展示效果</a></span></div>
+    		</li>
+    		<li class="li_list">
+    			<div class="pic_list"><span><a href="#">PHP实现发红包程序</a></span></div>
+    		</li>
+    		<li class="li_list">
+    			<div class="pic_list"><span><a href="#">使用按钮控制HTML5背景音乐开关</a></span></div>
+    		</li>
+            <li class="li_list">
+                <div class="pic_list"><span><a href="#">超酷的照片墙展示效果</a></span></div>
+            </li>
+            <li class="li_list">
+                <div class="pic_list"><span><a href="#">PHP实现发红包程序</a></span></div>
+            </li>
+            <li class="li_list">
+                <div class="pic_list"><span><a href="#">使用按钮控制HTML5背景音乐开关</a></span></div>
+            </li>
+          </ul>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+	var page='pagenavi';
+	var mslide='slider';
+	var mtitle='emtitle';
+	arrdiv = 'arrdiv';
+
+	var as=document.getElementById(page).getElementsByTagName('a');
+
+	var tt=new TouchSlider({id:mslide,'auto':'-1',fx:'ease-out',direction:'left',speed:600,timeout:5000,'before':function(index){
+		var as=document.getElementById(this.page).getElementsByTagName('a');
+		as[this.p].className='';
+		as[index].className='active';
+		this.p=index;
+		var txt=as[index].innerText;
+		$("#"+this.page).parent().find('.emtitle').text(txt);
+		var txturl=as[index].getAttribute('href');		
+		var turl=txturl.split('#');
+		$("#"+this.page).parent().find('.go_btn').attr('href',turl[1]);
+	}});
+
+	tt.page = page;
+	tt.p = 0;
+	//console.dir(tt); console.dir(tt.__proto__);
+	for(var i=0;i<as.length;i++){
+		(function(){
+			var j=i;
+			as[j].tt = tt;
+			as[j].onclick=function(){
+				this.tt.slide(j);
+				return false;
+			}
+		})();
+	}
+</script>
+</body>
+</html>
